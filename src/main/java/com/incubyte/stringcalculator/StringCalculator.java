@@ -10,8 +10,13 @@ public class StringCalculator {
 		if (numbers.isBlank() || numbers.isEmpty()) {
 			return result;
 		} else {
-			String[] nums = numbers.trim().split(",|\n");
+			String[] nums;
 
+			if (!numbers.contains("//")) {
+				nums = numbers.trim().split(",|\n");
+			} else {
+				nums = numbers.trim().substring(2).split(numbers.charAt(2) + "|\n");
+			}
 			result = Stream.of(nums).filter(s -> !s.isBlank() && !s.trim().isEmpty())
 					.mapToInt(s -> Integer.parseInt(s.trim())).sum();
 
