@@ -33,4 +33,16 @@ public class StringCalculatorTest {
 		assertThrows(NumberFormatException.class, () -> StringCalculator.add("1,X"));
 	}
 
+	@Test
+	public void handleNewLinesBetweenNumbersAndReturnSum() {
+
+		assertEquals(6, StringCalculator.add("1\n2,3"));
+	}
+
+	@Test
+	public void handleMultipleNewLinesAndCommasBetweenNumbesAndReturnSum() {
+
+		assertEquals(30, StringCalculator.add("    1,2\n3\n4\n   4,  4\n4 ,4 \n4 "));
+	}
+
 }

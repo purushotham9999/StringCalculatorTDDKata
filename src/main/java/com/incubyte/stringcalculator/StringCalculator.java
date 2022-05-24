@@ -1,5 +1,7 @@
 package com.incubyte.stringcalculator;
 
+import java.util.stream.Stream;
+
 public class StringCalculator {
 
 	public static int add(String numbers) {
@@ -8,10 +10,10 @@ public class StringCalculator {
 		if (numbers.isBlank() || numbers.isEmpty()) {
 			return result;
 		} else {
-			String[] nums = numbers.split(",");
-			for (String num : nums) {
-				result += !num.trim().isBlank() && !num.trim().isEmpty() ? Integer.parseInt(num.trim()) : 0;
-			}
+			String[] nums = numbers.trim().split(",|\n");
+
+			result = Stream.of(nums).filter(s -> !s.isBlank() && !s.trim().isEmpty())
+					.mapToInt(s -> Integer.parseInt(s.trim())).sum();
 
 		}
 		return result;
